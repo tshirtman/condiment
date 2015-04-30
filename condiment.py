@@ -87,14 +87,14 @@ class Parser(object):
 
         try:
             for index, line in self.parse(self.input):
-                fd.write(line)
+                fd.write(line.encode('utf-8'))
 
             now = datetime.datetime.now()
-            fd.write('\n# ----- CONDIMENT VARIABLES -----\n')
-            fd.write('# Generated at {}\n'.format(now.strftime("%Y-%m-%d %H:%M")))
+            fd.write(b'\n# ----- CONDIMENT VARIABLES -----\n')
+            fd.write(b'# Generated at {}\n'.format(now.strftime("%Y-%m-%d %H:%M")))
             for key, value in self.eval_dict.items():
-                fd.write('# {} = {}\n'.format(key, value))
-            fd.write('# ---------------------------------\n')
+                fd.write(b'# {} = {}\n'.format(key, value))
+            fd.write(b'# ---------------------------------\n')
         finally:
             if self.output is not sys.stdout:
                 fd.close()
